@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Board from "./Board";
+import Moves from "./Moves";
 
 function Game() {
   const [currentMove, setCurrentMove] = useState(0);
@@ -63,10 +64,17 @@ function Game() {
     return null;
   }
 
+  function goToMove(i) {
+    const newHistory = history.splice(0, i + 1);
+    setCurrentMove(i);
+    setHistory(newHistory);
+  }
+
   return (
-    <>
+    <div className="flex flex-row gap-8">
       <Board squares={currentSquares} onSquareClick={handleClick} />
-    </>
+      <Moves moves={history} goToMove={goToMove} />
+    </div>
   );
 }
 
